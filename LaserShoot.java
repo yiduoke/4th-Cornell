@@ -1,6 +1,15 @@
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	
@@ -21,6 +30,8 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.rotate(theta,x+50,y+3);
 		g2d.fillRect((int)x,(int)y,100,6);
+		g2d.setColor(Color.BLACK);
+		g2d.drawLine(0,400,1500,400);
 	}
 	
 	public void actionPerformed(ActionEvent e){
@@ -79,7 +90,7 @@ public static void main (String[] args){
 	LaserShoot marg = new LaserShoot();
 	JFrame frame= new JFrame("HIIII");
 	frame.setVisible(true);
-	frame.setSize(700,700);
+	frame.setSize(1500,800);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.add(marg);
 }
