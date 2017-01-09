@@ -1,0 +1,7 @@
+import java.awt.*;
+
+public class Laser{
+    Line2D l;
+
+    public Mirror()
+}

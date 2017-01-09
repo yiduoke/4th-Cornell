@@ -9,9 +9,9 @@ public class GUI extends JFrame implements ActionListener{
     private JTextField t;
 
     public GUI(){
-	this.setTitle("My first GUI");
+	this.setTitle("Optics LSS");
 	this.setSize(1500,800);
-	this.setLocation(100,100);
+	this.setLocation(50,50);
 	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 	pane = this.getContentPane();
