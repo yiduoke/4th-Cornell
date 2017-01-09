@@ -14,8 +14,7 @@ import javax.swing.Timer;
 public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	
 	Timer tm = new Timer(5, this);
-	double x=0, velX=0, y=0, velY=0;
-	double theta=0, theta1=0;
+    Mirror a=new Mirror (0,0,0,1,1,1,1,0);
 	public LaserShoot(){
 		tm.start();
 		addKeyListener(this);
@@ -29,7 +28,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.rotate(theta,x+50,y+3);
-		g2d.fillRect((int)x,(int)y,100,6);
+		g2d.drawRect((int)x,(int)y,100,6);
 		g2d.setColor(Color.BLACK);
 		g2d.drawLine(0,400,1500,400);
 	}
