@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
-import java.math.*;
 
 import javax.swing.*;
 
@@ -20,7 +19,7 @@ public class Laser extends JComponent{
 	    this.y1 = y1;
 	    this.x2 = x2;
 	    this.y2 = y2;
-	    this.theta = atan((y2-y1)/(x2-x1));
+	    this.theta = Math.atan((y2-y1)/(x2-x1));
 	    this.color = color;
 	}               
     }
