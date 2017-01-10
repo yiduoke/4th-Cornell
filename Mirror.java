@@ -4,13 +4,13 @@ import java.awt.Rectangle;
 
 
 public class Mirror {
-	double midX,midY;
-    int x1,y1,x2,y2;
+    double midX, midY;
+    int x1, y1, x2, y2;
     double xa;
     double ya;
-    double theta=0;
+    double theta = 0;
     double thetaChange;
-    LaserShoot laserShoot;
+    double length;
 
     public Mirror(int a,int b,int c,int d){
     	x1=a;
@@ -19,6 +19,7 @@ public class Mirror {
     	y2=d;
     	midX=(x1+x2)/2;
     	midY=(y1+y2)/2;
+	length = Math.sqrt((y2-y1)*(y2-y1)+(x2-x1)*(x2-x1));
     }
 
     public void move(double t) {
@@ -27,7 +28,7 @@ public class Mirror {
 	x2=(int) (midX+Math.cos(theta)*75);
 	y1=(int) (midY+Math.sin(theta)*75);
 	y2=(int) (midY-Math.sin(theta)*75);
-	}
+    }
 
 
     public void paint(Graphics2D g) {
