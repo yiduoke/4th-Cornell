@@ -43,11 +43,12 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 		g.setColor(Color.BLACK);
 		g2d.drawLine(0,350,1300,350);
 		
-		//laser dot
-		g.setColor(Color.RED);
-		g2d.fillOval(1270, 343, 15, 15);
-		
+		//laser
 		g.setColor(Color.GREEN);
+		g2d.fillOval(1280, 343, 15, 15);
+		
+		//target
+		g.setColor(Color.RED);
 		g2d.fillOval(0, 343, 15, 15);
 		
 		}
