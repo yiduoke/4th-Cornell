@@ -1,3 +1,4 @@
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -14,12 +15,14 @@ import javax.swing.Timer;
 public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	
 	Timer tm = new Timer(5, this);
-    Mirror a=new Mirror (0,0,0,1,1,1,1,0);
+	Mirror margaret;
+    
 	public LaserShoot(){
 		tm.start();
 		addKeyListener(this);
 		setFocusable(true);//enables keylistener
 		setFocusTraversalKeysEnabled(false);
+		margaret=new Mirror(100,100,200,100);
 	}
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
@@ -27,69 +30,60 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 		Graphics2D g2d=(Graphics2D)g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.rotate(theta,x+50,y+3);
-		g2d.drawRect((int)x,(int)y,100,6);
-		g2d.setColor(Color.BLACK);
-		g2d.drawLine(0,400,1500,400);
-	}
+		g2d.setStroke(new BasicStroke(3));
+		g2d.drawLine(margaret.x1,margaret.y1,margaret.x2,margaret.y2);
+		margaret.paint(g2d);
+		}
 	
 	public void actionPerformed(ActionEvent e){
-		if (x<0){
-			velX=0;
-			x=0;
-		}
-		if (x>640){
-			velX=0;
-			x=640;
-		}
-		if (y<0){
-			velY=0;
-			y=0;
-		}
-		if (y>640){
-			velY=0;
-			y=640;
-		}
-		x+=velX;
-		y+=velY;
+		margaret.x1+=margaret.xa;
+		margaret.x2+=margaret.xa;
+		margaret.y2+=margaret.ya;
+		margaret.y1+=margaret.ya;
+		margaret.move(margaret.thetaChange,margaret.xa,margaret.ya);
 		repaint();//calls paintcomponent
 	}
 	
 	public void keyPressed(KeyEvent e){
 		int c=e.getKeyCode();
 		if (c== KeyEvent.VK_LEFT){
-			velY=0;
-			velX=-0.5;
+			margaret.ya=0;
+			margaret.xa=-0.5;
+			margaret.thetaChange=0;
 		}
 		if (c== KeyEvent.VK_RIGHT){
-			velY=0;
-			velX=0.5;
+			margaret.ya=0;
+			margaret.xa=0.5;
+			margaret.thetaChange=0;
 		}
 		if (c==KeyEvent.VK_UP){
-			velY=-0.5;
-			velX=0;
+			margaret.ya=-0.5;
+			margaret.xa=0;
+			margaret.thetaChange=0;
 		}
 		if (c== KeyEvent.VK_DOWN){
-			velX=0;
-			velY=0.5;
+			margaret.xa=0;
+			margaret.ya=0.5;
+			margaret.thetaChange=0;
 		}
 		if (c== KeyEvent.VK_R){
-			theta+=0.05;
+			margaret.thetaChange=0.005;
 		}
 	}
 	
 	public void keyTyped(KeyEvent e){
 	}
 	public void keyReleased(KeyEvent e){
-		velX=0;
-		velY=0;
+		margaret.thetaChange=0;
+		margaret.xa=0;
+		margaret.ya=0;
 	}
 	
 public static void main (String[] args){
 	LaserShoot marg = new LaserShoot();
 	JFrame frame= new JFrame("HIIII");
 	frame.setVisible(true);
-	frame.setSize(1500,800);
+	frame.setSize(1300,700);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.add(marg);
 }
