@@ -20,16 +20,12 @@ public class Mirror {
     	midY=(y1+y2)/2;
     }
 
-    public void move(double t, double xa, double ya) {
+    public void move(double t) {
 	theta+=t;
-	x1=(int) (midX-Math.cos(theta)*50);
-	x2=(int) (midX+Math.cos(theta)*50);
-	y1=(int) (midY+Math.sin(theta)*50);
-	y2=(int) (midY-Math.sin(theta)*50);
-	x1+=xa;
-	x2+=xa;
-	y1+=ya;
-	y2+=ya;
+	x1=(int) (midX-Math.cos(theta)*75);
+	x2=(int) (midX+Math.cos(theta)*75);
+	y1=(int) (midY+Math.sin(theta)*75);
+	y2=(int) (midY-Math.sin(theta)*75);
 	}
 
 

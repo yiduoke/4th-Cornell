@@ -22,25 +22,24 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 		addKeyListener(this);
 		setFocusable(true);//enables keylistener
 		setFocusTraversalKeysEnabled(false);
-		margaret=new Mirror(100,100,200,100);
+		margaret=new Mirror(100,100,250,100);
 	}
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.setColor(Color.RED);
+		g.setColor(Color.BLUE);
 		Graphics2D g2d=(Graphics2D)g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.setStroke(new BasicStroke(3));
+		g2d.setStroke(new BasicStroke(5));
 		g2d.drawLine(margaret.x1,margaret.y1,margaret.x2,margaret.y2);
-		margaret.paint(g2d);
 		}
 	
 	public void actionPerformed(ActionEvent e){
+		margaret.move(margaret.thetaChange);
 		margaret.x1+=margaret.xa;
 		margaret.x2+=margaret.xa;
-		margaret.y2+=margaret.ya;
 		margaret.y1+=margaret.ya;
-		margaret.move(margaret.thetaChange,margaret.xa,margaret.ya);
+		margaret.y2+=margaret.ya;
 		repaint();//calls paintcomponent
 	}
 	
@@ -68,6 +67,8 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 		}
 		if (c== KeyEvent.VK_R){
 			margaret.thetaChange=0.005;
+			margaret.xa=0;
+			margaret.ya=0;
 		}
 	}
 	
