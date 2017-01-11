@@ -1,44 +1,45 @@
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+
 public class Mirror {
-    double x1,y1,x2,y2,x3,y3,x4,y4;
+    double midX,midY;
+    int x1,y1,x2,y2;
     int xa;
     int ya;
     double theta=0;
+    double thetaChange;
     LaserShoot laserShoot;
-    Rectangle rect;
 
-    public Mirror(int a,int b,int c,int d, int e, int f, int g, int h){
-	rect= new Rectangle(x2,y2,(x3-x2),(y3-y4));
+    public Mirror(int a,int b,int c,int d){
+    	x1=a;
+    	y2=b;
+    	x2=c;
+    	y2=d;
+    	midX=(x1+x2)/2;
+    	midY=(y1+y2)/2;
     }
 
-    public void move() {
-	theta+=0.01;
-	x1=s(x1,y1)*Math.sin(theta);
-	x2=s(x2,y2)*Math.sin(theta);
-	x3=s(x3,y3)*Math.sin(theta);
-	x4=s(x4,y4)*Math.sin(theta);
-	y1=s(x1,y1)*Math.cos(theta);
-	y2=s(x2,y2)*Math.cos(theta);
-	y3=s(x3,y3)*Math.cos(theta);
-	y4=s(x4,y4)*Math.cos(theta);
-
-	//	x+=xa;
-	//	y+=ya;
+    public void rotate(double t) {
+	theta+=t;
+	x1=(int) (midX-Math.cos(theta)*75);
+	x2=(int) (midX+Math.cos(theta)*75);
+	y1=(int) (midY+Math.sin(theta)*75);
+	y2=(int) (midY-Math.sin(theta)*75);
 	}
-    public double s(double x, double y){///// a point's distance from origin
-	return Math.sqrt(x*x+y*y);
-    }
 
-
-    public void myMove(){
-	
+    public void translate(int xVel, int yVel){
+        x1+=xVel;
+	x2+=xVel;
+	y1+=yVel;
+	y2+=yVel;
+	midX+=xVel;
+	midY+=yVel;
     }
 
     public void paint(Graphics2D g) {
-	g.rotate(theta, rect.x + rect.width/2, rect.y + rect.height/2);
-	g.fill(rect);
+	g.drawLine((int)x1, (int)y1, (int)x2, (int)y2);
     }
 
 }
