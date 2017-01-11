@@ -20,11 +20,13 @@ public class Laser{
 	return Math.sqrt((y2-y1)*(y2-y1)+(x2-x1)*(x2-x1));
     }
 
-    public boolean intersect(Mirror m){ //abuses triangle inequality
+    public boolean intersect(Mirror m){ //abuses triangle inequality theorem
 	double d1 = distance(x1, y1, m.x1, m.y1);
 	double d2 = distance(x1, y1, m.x2, m.y2);
-	return (d1 + d2 == m.length);
+	return (d1 + d2 >= m.length*0.9999 || d1 + d2 <=  m.length*1.0001);
     }
 
-    //public void reflect
+    /*public void reflect(Mirror m){
+	theta = 
+	}*/
 }
