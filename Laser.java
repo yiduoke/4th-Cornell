@@ -5,13 +5,13 @@ import javax.swing.*;
 
 public class Laser{
 
-    int x1, y1;
+    int x, y;//should we change these to doubles
     double theta;
     boolean on;
 
     public Laser(int x, int y, Color color) {
-	this.x1 = x1;
-	this.y1 = y1;
+	this.x = x;
+	this.y = y;
 	theta = 0;
 	on = false;//should not be on at first wINSTON
     }
@@ -21,8 +21,8 @@ public class Laser{
     }
 
     public boolean intersect(Mirror m){ //abuses triangle inequality theorem
-	double d1 = distance(x1, y1, m.x1, m.y1);
-	double d2 = distance(x1, y1, m.x2, m.y2);
+	double d1 = distance(x, y, m.x1, m.y1);
+	double d2 = distance(x, y, m.x2, m.y2);
 	return (d1 + d2 >= distance(m.x1,m.y1,m.x2,m.y2)*0.9999 || d1 + d2 <= distance(m.x1,m.y1,m.x2,m.y2)*1.0001);
     }
 
@@ -30,4 +30,9 @@ public class Laser{
     	if (m.theta==0 || m.theta==Math.PI){on=false;}
     	else {theta = Math.toRadians(360-Math.toDegrees(theta)+2*Math.toDegrees(m.theta));}
 	}
+    
+    public void propagate(){
+    	x+=0.01;
+    	y-=x*Math.tan(theta);
+    }
 }
