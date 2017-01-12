@@ -1,49 +1,38 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
-
 import javax.swing.*;
 
-public class Laser extends JComponent{
+public class Laser{
 
-    private static class Line{
-	final int x1; 
-	final int y1;
-	final int x2;
-	final int y2;   
-	final Color color;
+    int x, y;//should we change these to doubles
+    double theta;
+    boolean on;
 
-	public Line(int x1, int y1, int x2, int y2, Color color) {
-	    this.x1 = x1;
-	    this.y1 = y1;
-	    this.x2 = x2;
-	    this.y2 = y2;
-	    this.color = color;
-	}               
+    public Laser(int x, int y, Color color) {
+	this.x = x;
+	this.y = y;
+	theta = 0;
+	on = false;//should not be on at first wINSTON
     }
 
-    private final LinkedList<Line> lines = new LinkedList<Line>();
-
-    public void addLine(int x1, int x2, int x3, int x4) {
-	addLine(x1, x2, x3, x4, Color.black);
+    private double distance(int x1, int y1, int x2, int y2){
+	return Math.sqrt((y2-y1)*(y2-y1)+(x2-x1)*(x2-x1));
     }
 
-    public void addLine(int x1, int x2, int x3, int x4, Color color) {
-	lines.add(new Line(x1,x2,x3,x4, color));        
-	repaint();
+    public boolean intersect(Mirror m){ //abuses triangle inequality theorem
+	double d1 = distance(x, y, m.x1, m.y1);
+	double d2 = distance(x, y, m.x2, m.y2);
+	return (d1 + d2 >= distance(m.x1,m.y1,m.x2,m.y2)*0.9999 || d1 + d2 <= distance(m.x1,m.y1,m.x2,m.y2)*1.0001);
     }
 
-    public void clearLines() {
-	lines.clear();
-	repaint();
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-	super.paintComponent(g);
-	for (Line line : lines) {
-	    g.setColor(line.color);
-	    g.drawLine(line.x1, line.y1, line.x2, line.y2);
+    public void reflect(Mirror m){
+    	if (m.theta==0 || m.theta==Math.PI){on=false;}
+    	else {theta = Math.toRadians(360-Math.toDegrees(theta)+2*Math.toDegrees(m.theta));}
 	}
+    
+    public void propagate(){
+    	x+=0.01;
+    	y-=x*Math.tan(theta);
     }
 }
