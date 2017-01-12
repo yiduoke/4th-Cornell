@@ -13,7 +13,7 @@ public class Laser{
 	this.x1 = x1;
 	this.y1 = y1;
 	theta = 0;
-	on = true;
+	on = false;//should not be on at first
     }
 
     private double distance(int x1, int y1, int x2, int y2){
@@ -27,6 +27,7 @@ public class Laser{
     }
 
     public void reflect(Mirror m){
-	theta = Math.toRadians(360-Math.toDegrees(theta)+2*Math.toDegrees(m.theta));
+    	if (m.theta==0 || m.theta==Math.PI){on=false;}
+    	else {theta = Math.toRadians(360-Math.toDegrees(theta)+2*Math.toDegrees(m.theta));}
 	}
 }
