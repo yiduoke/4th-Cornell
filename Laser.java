@@ -13,7 +13,7 @@ public class Laser{
 	this.x1 = x1;
 	this.y1 = y1;
 	theta = 0;
-	on = false;//should not be on at first
+	on = false;//should not be on at first wINSTON
     }
 
     private double distance(int x1, int y1, int x2, int y2){
