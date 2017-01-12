@@ -23,10 +23,10 @@ public class Laser{
     public boolean intersect(Mirror m){ //abuses triangle inequality theorem
 	double d1 = distance(x1, y1, m.x1, m.y1);
 	double d2 = distance(x1, y1, m.x2, m.y2);
-	return (d1 + d2 >= m.length*0.9999 || d1 + d2 <=  m.length*1.0001);
+	return (d1 + d2 >= distance(m.x1,m.y1,m.x2,m.y2)*0.9999 || d1 + d2 <= distance(m.x1,m.y1,m.x2,m.y2)*1.0001);
     }
 
-    /*public void reflect(Mirror m){
-	theta = 
-	}*/
+    public void reflect(Mirror m){
+	theta = Math.toRadians(360-Math.toDegrees(theta)+2*Math.toDegrees(m.theta));
+	}
 }
