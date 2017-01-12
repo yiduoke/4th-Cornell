@@ -17,6 +17,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
     Timer tm = new Timer(5, this);
     Mirror margaret;
     Mirror winston;
+    Mirror[] wall;
     
     public LaserShoot(){
 	tm.start();
@@ -25,6 +26,8 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	setFocusTraversalKeysEnabled(false);
 	margaret=new Mirror(100,300,250,300);
 	winston=new Mirror(600,500,750,500);
+	Mirror[0]=margaret;
+	Mirror[1]=winston;
     }
     public void paintComponent(Graphics g){
 	super.paintComponent(g);
