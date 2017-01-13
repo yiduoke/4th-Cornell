@@ -5,18 +5,18 @@ import javax.swing.*;
 
 public class Laser{
 
-    int x, y;//should we change these to doubles
+    double x, y;
     double theta;
     boolean on;
 
-    public Laser(int x, int y, Color color) {
+    public Laser(double x, double y) {
 	this.x = x;
 	this.y = y;
 	theta = 0;
 	on = false;//should not be on at first wINSTON
     }
 
-    private double distance(int x1, int y1, int x2, int y2){
+    private double distance(double x1, double y1, double x2, double y2){
 	return Math.sqrt((y2-y1)*(y2-y1)+(x2-x1)*(x2-x1));
     }
 
@@ -32,7 +32,12 @@ public class Laser{
 	}
     
     public void propagate(){
-    	x+=0.01;
-    	y-=x*Math.tan(theta);
+	if (Math.cos(theta) > 0){
+	    x += 0.01;
+	}
+	else if (Math.cos(theta) < 0){
+	    x -= 0.01;
+	}
+	y -= x * Math.tan(theta);
     }
 }
