@@ -1,16 +1,7 @@
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.geom.*;
+import javax.swing.*;
 
 public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	
@@ -63,6 +54,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 
 	//laser
 	g.setColor(Color.RED);
+	Ellipse2D.Double laser = new Ellipse2D.Double(L.x,L.y,5,5);
 	g2d.fillOval(L.x,L.y,5,5);
 	//System.out.println(L.x);
     }
@@ -118,7 +110,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	}
 	if (c == KeyEvent.VK_L){
 	    L.on = true;
-	    //System.out.println(L.on);
+	    System.out.println(L.on);
 	} 
     }
 	
