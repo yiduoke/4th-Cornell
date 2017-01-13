@@ -38,8 +38,4 @@ public class Mirror {
 	midY+=yVel;
     }
 
-    public void paint(Graphics2D g) {
-	g.drawLine((int)x1, (int)y1, (int)x2, (int)y2);
-    }
-
 }
