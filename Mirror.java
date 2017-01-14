@@ -5,13 +5,14 @@ import java.awt.Rectangle;
 
 public class Mirror {
     double midX,midY;
-    double x1,y1,x2,y2;
+    int x1,y1,x2,y2;
     int xa;
     int ya;
-    double theta = 0;
+    double theta=0;
     double thetaChange;
+    LaserShoot laserShoot;
 
-    public Mirror(double a, double b, double c, double d){
+    public Mirror(int a,int b,int c,int d){
     	x1=a;
     	y2=b;
     	x2=c;
@@ -36,4 +37,5 @@ public class Mirror {
 	midX+=xVel;
 	midY+=yVel;
     }
+
 }

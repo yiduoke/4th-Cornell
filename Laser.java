@@ -33,11 +33,11 @@ public class Laser{
     
     public void propagate(){
 	if (Math.cos(theta) > 0){
-	    x += 0.01;
+	    x += 1;
 	}
 	else if (Math.cos(theta) < 0){
-	    x -= 0.01;
+	    x -= 1;
 	}
-	y -= x * Math.tan(theta);
+	y -= Math.tan(theta);
     }
 }

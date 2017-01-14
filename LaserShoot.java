@@ -18,7 +18,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	setFocusTraversalKeysEnabled(false);
 	margaret = new Mirror(100,300,250,300);
 	winston = new Mirror(600,500,750,500);
-	L = new Laser(0,300,Color.RED);
+	L = new Laser(0.0,300.0);
 	//Mirror[0]=margaret;
 	//Mirror[1]=winston;
     }
@@ -52,10 +52,10 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	g2d.fillOval(margaret.x2,margaret.y2,10,10);
 	g2d.fillOval(winston.x2,winston.y2,10,10);
 
-	//laser
+	//laser photon
 	g.setColor(Color.RED);
 	Ellipse2D.Double laser = new Ellipse2D.Double(L.x,L.y,5,5);
-	g2d.fillOval(L.x,L.y,5,5);
+	g2d.draw(laser);
 	//System.out.println(L.x);
     }
 
@@ -110,7 +110,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	}
 	if (c == KeyEvent.VK_L){
 	    L.on = true;
-	    System.out.println(L.on);
+	    System.out.println(L.x);
 	} 
     }
 	
