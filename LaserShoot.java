@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 public class LaserShoot extends JPanel implements ActionListener, KeyListener{
@@ -9,7 +11,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
     Mirror margaret;
     Mirror winston;
     Laser L;
-    //Mirror[] elaine;
+    //ArrayList<Mirror> elaine;
     
     public LaserShoot(){
 	tm.start();
@@ -19,8 +21,8 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	margaret = new Mirror(100,300,250,300);
 	winston = new Mirror(600,500,750,500);
 	L = new Laser(0.0,300.0);
-	//elaine[0]=margaret;
-	//elaine[1]=winston;
+	//elaine.add(margaret);
+	//elaine.add(winston);
     }
     public void paintComponent(Graphics g){
 	super.paintComponent(g);
@@ -59,7 +61,6 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	g.setColor(Color.RED);
 	Ellipse2D.Double laser = new Ellipse2D.Double(L.x,L.y,5,5);
 	g2d.draw(laser);
-	//System.out.println(L.x);
     }
 
     public void actionPerformed(ActionEvent e){
@@ -69,51 +70,68 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	winston.translate(winston.xa,winston.ya);
 	if(L.on){
 	    L.propagate();
-	    if(L.intersect(margaret)){
-		L.reflect(margaret);
+	    if (L.intersect(margaret)){
+	    	L.reflect(margaret);
+	    	}
+	    if (L.intersect(winston)){
+	    	L.reflect(winston);
+	    	}
 	    }
-	}
 	repaint();//calls paintcomponent
-    }
+	}
 	
     public void keyPressed(KeyEvent e){
 	int c = e.getKeyCode();
+	if (!L.on){
 	if (c == KeyEvent.VK_LEFT){
-	    System.out.println("Left");
 	    margaret.ya=0;
 	    margaret.xa=-1;
 	    margaret.thetaChange=0;
-	    //System.out.println(margaret.ya);
-	    //System.out.println(margaret.xa);
 	}
 	if (c == KeyEvent.VK_RIGHT){
 	    margaret.ya=0;
 	    margaret.xa=1;
-	    //margaret.thetaChange=0;
 	}
 	if (c ==KeyEvent.VK_UP){
 	    margaret.ya=-1;
 	    margaret.xa=0;
-	    //margaret.thetaChange=0;
 	}
 	if (c == KeyEvent.VK_DOWN){
 	    margaret.xa=0;
 	    margaret.ya=1;
+	}
+	if (c == KeyEvent.VK_S){
+		winston.ya=0;
+		winston.xa=-1;
+		winston.thetaChange=0;
+	}
+	if (c == KeyEvent.VK_F){
+		winston.ya=0;
+	    winston.xa=1;
+	    //margaret.thetaChange=0;
+	}
+	if (c ==KeyEvent.VK_E){
+		winston.ya=-1;
+	    winston.xa=0;
+	    //margaret.thetaChange=0;
+	}
+	if (c == KeyEvent.VK_D){
+	    winston.xa=0;
+	    winston.ya=1;
 	    //Xmargaret.thetaChange=0;
 	}
 	if (c == KeyEvent.VK_M){
-	    margaret.thetaChange=0.005;
-	    //margaret.xa=0;
-	    //margaret.ya=0;
+	    margaret.thetaChange=0.002;
 	}
 	if (c == KeyEvent.VK_W){
-	    winston.thetaChange=0.005;
+	    winston.thetaChange=0.002;
 	    winston.xa=0;
 	    winston.ya=0;
 	}
 	if (c == KeyEvent.VK_L){
 	    L.on = true;
 	} 
+	}
     }
 	
     public void keyTyped(KeyEvent e){
@@ -124,7 +142,9 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	winston.thetaChange=0;
 	margaret.xa=0;
 	margaret.ya=0;
-	L.on=false;
+	winston.xa=0;
+	winston.ya=0;
+	//L.on=false;
     }
 	
     public static void main (String[] args){
