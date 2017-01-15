@@ -9,7 +9,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
     Mirror margaret;
     Mirror winston;
     Laser L;
-    //Mirror[] wall;
+    //Mirror[] elaine;
     
     public LaserShoot(){
 	tm.start();
@@ -19,8 +19,8 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	margaret = new Mirror(100,300,250,300);
 	winston = new Mirror(600,500,750,500);
 	L = new Laser(0.0,300.0);
-	//Mirror[0]=margaret;
-	//Mirror[1]=winston;
+	//elaine[0]=margaret;
+	//elaine[1]=winston;
     }
     public void paintComponent(Graphics g){
 	super.paintComponent(g);
@@ -30,9 +30,10 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 			     RenderingHints.VALUE_ANTIALIAS_ON);
 	//mirrors
 	g2d.setStroke(new BasicStroke(5));
-	g2d.drawLine(margaret.x1,margaret.y1,margaret.x2,margaret.y2);
-
-	g2d.drawLine(winston.x1,winston.y1,winston.x2,winston.y2);
+	Line2D.Double margLine = new Line2D.Double(margaret.x1,margaret.y1,margaret.x2,margaret.y2);
+	g2d.draw(margLine);
+	Line2D.Double winLine = new Line2D.Double(winston.x1,winston.y1,winston.x2,winston.y2);
+	g2d.draw(winLine);
 		
 	//midline
 	g2d.setStroke(new BasicStroke(1));
@@ -41,7 +42,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 		
 	//target
 	g.setColor(Color.GREEN);
-	g2d.fillOval(1280, 343, 15, 15);
+	g2d.fillOval(1270, 343, 15, 15);
 		
 	//laser source
 	g.setColor(Color.RED);
@@ -49,8 +50,10 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 
 	//dots on end of mirrors for reference in angle calculation
 	g.setColor(Color.ORANGE);
-	g2d.fillOval(margaret.x2,margaret.y2,10,10);
-	g2d.fillOval(winston.x2,winston.y2,10,10);
+	Ellipse2D.Double margDot = new Ellipse2D.Double(margaret.x2,margaret.y2,10,10);
+	g2d.draw(margDot);
+	Ellipse2D.Double winDot = new Ellipse2D.Double(winston.x2,winston.y2,10,10);
+	g2d.draw(winDot);
 
 	//laser photon
 	g.setColor(Color.RED);
@@ -110,7 +113,6 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	}
 	if (c == KeyEvent.VK_L){
 	    L.on = true;
-	    System.out.println(L.x);
 	} 
     }
 	
@@ -122,6 +124,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	winston.thetaChange=0;
 	margaret.xa=0;
 	margaret.ya=0;
+	L.on=false;
     }
 	
     public static void main (String[] args){

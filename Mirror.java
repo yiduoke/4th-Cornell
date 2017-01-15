@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 
 public class Mirror {
     double midX,midY;
-    int x1,y1,x2,y2;
+    double x1,y1,x2,y2;
     int xa;
     int ya;
     double theta=0;
@@ -30,7 +30,7 @@ public class Mirror {
 	}
 
     public void translate(int xVel, int yVel){
-        x1+=xVel;
+    x1+=xVel;
 	x2+=xVel;
 	y1+=yVel;
 	y2+=yVel;

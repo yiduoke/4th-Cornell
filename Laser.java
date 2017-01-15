@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Line2D;
 import java.util.*;
 import javax.swing.*;
 
@@ -23,8 +24,15 @@ public class Laser{
     public boolean intersect(Mirror m){ //abuses triangle inequality theorem
 	double d1 = distance(x, y, m.x1, m.y1);
 	double d2 = distance(x, y, m.x2, m.y2);
-	return (d1 + d2 >= distance(m.x1,m.y1,m.x2,m.y2)*0.9999 || d1 + d2 <= distance(m.x1,m.y1,m.x2,m.y2)*1.0001);
+	double d3=distance(m.x1,m.y1,m.x2,m.y2); //length of mirror
+	//return (d1 + d2 >= distance(m.x1,m.y1,m.x2,m.y2)*0.9999 || d1 + d2 <= distance(m.x1,m.y1,m.x2,m.y2)*1.0001);
+	return Math.abs(d1+d2-d3)<0.0008;
     }
+    /*
+    public boolean intersect(Mirror m){
+    	Line2D.Double temp= new Line2D.Double(m.x1,m.y1,m.x2,m.y2);
+    	return temp.contains(x,y);
+    }*/
 
     public void reflect(Mirror m){
     	if (m.theta==0 || m.theta==Math.PI){on=false;}
@@ -33,11 +41,11 @@ public class Laser{
     
     public void propagate(){
 	if (Math.cos(theta) > 0){
-	    x += 1;
+	    x += 0.1;
 	}
 	else if (Math.cos(theta) < 0){
-	    x -= 1;
+	    x -= 0.1;
 	}
-	y -= Math.tan(theta);
+	y -= 0.1*Math.tan(theta);
     }
 }
