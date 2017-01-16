@@ -97,7 +97,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	if (!L.on){
 	    if (c == KeyEvent.VK_LEFT){
 		margaret.ya=0;
-		margaret.xa=0.1;
+		margaret.xa=-0.1;
 		margaret.thetaChange=0;
 	    }
 	    if (c == KeyEvent.VK_RIGHT){
