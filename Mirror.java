@@ -6,6 +6,7 @@ public class Mirror {
     double xa, ya;
     double theta=0;
     double thetaChange;
+    boolean canReflect;
     //LaserShoot laserShoot;
 
     public Mirror(int a,int b,int c,int d){
@@ -15,6 +16,7 @@ public class Mirror {
     	y2=d;
     	midX=(x1+x2)/2;
     	midY=(y1+y2)/2;
+	canReflect = true;
     }
 
     public void rotate(double t) {

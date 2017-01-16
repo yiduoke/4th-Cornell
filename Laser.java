@@ -29,22 +29,20 @@ public class Laser{
 	double d2 = distance(x, y, m.x2, m.y2);
 	double d3 = distance(m.x1,m.y1,m.x2,m.y2); //length of mirror
 	//return (d1 + d2 >= distance(m.x1,m.y1,m.x2,m.y2)*0.9999 || d1 + d2 <= distance(m.x1,m.y1,m.x2,m.y2)*1.0001);
-	return Math.abs(d1 + d2 - d3) < .1; //allows for an error margin because even doubles can't be that precise, adjust based on tests
+	return Math.abs(d1 + d2 - d3) < .005; //allows for an error margin because even doubles can't be that precise, adjust based on tests
     }
 
     public void reflect(Mirror m){
-    	/*if (m.theta==0 || m.theta==Math.PI){ //screws with non-rotated mirrors, so we removed it
-	    on=false;
-	    }*/
-	/*
-	if (Math.sin(theta) > 0 && Math.cos(theta) > 0){
-	    theta = 2 * m.theta - theta;
+	if (m.canReflect){
+	    if (Math.sin(theta) > 0 && Math.cos(theta) > 0){
+		theta = 2 * m.theta - theta;
+	    }
+	    else{
+		theta = Math.toRadians(360 - Math.toDegrees(theta) + 2 * Math.toDegrees(m.theta));
+	    }
 	}
-	else{
-	*/
-	theta = Math.toRadians(360 - Math.toDegrees(theta) + 2 * Math.toDegrees(m.theta));
-	//}
 	theta %= 2 * Math.PI;
+	m.canReflect = false;
     }
     
     public void propagate(){

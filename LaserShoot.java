@@ -79,9 +79,11 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	    L.propagate();
 	    if (L.intersect(margaret)){
 	    	L.reflect(margaret);
+		winston.canReflect = true;
 	    }
 	    if (L.intersect(winston)){
 	    	L.reflect(winston);
+		margaret.canReflect = true;
 	    }
 	    elainex.add(L.x);
 	    elainey.add(L.y);
@@ -95,7 +97,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	if (!L.on){
 	    if (c == KeyEvent.VK_LEFT){
 		margaret.ya=0;
-		margaret.xa=-0.1;
+		margaret.xa=0.1;
 		margaret.thetaChange=0;
 	    }
 	    if (c == KeyEvent.VK_RIGHT){
