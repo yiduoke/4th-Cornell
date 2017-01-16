@@ -1,16 +1,12 @@
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-
+import java.awt.*;
 
 public class Mirror {
     double midX,midY;
-    double x1,y1,x2,y2;
-    int xa;
-    int ya;
+    double x1, y1, x2, y2;
+    double xa, ya;
     double theta=0;
     double thetaChange;
-    LaserShoot laserShoot;
+    //LaserShoot laserShoot;
 
     public Mirror(int a,int b,int c,int d){
     	x1=a;
@@ -22,14 +18,15 @@ public class Mirror {
     }
 
     public void rotate(double t) {
-	theta+=t;
-	x1=(int) (midX-Math.cos(theta)*75);
-	x2=(int) (midX+Math.cos(theta)*75);
-	y1=(int) (midY+Math.sin(theta)*75);
-	y2=(int) (midY-Math.sin(theta)*75);
+	theta += t;
+	theta %= 2 * Math.PI;
+	x1 = (int) (midX-Math.cos(theta)*75);
+	x2 = (int) (midX+Math.cos(theta)*75);
+	y1 = (int) (midY+Math.sin(theta)*75);
+	y2 = (int) (midY-Math.sin(theta)*75);
 	}
 
-    public void translate(int xVel, int yVel){
+    public void translate(double xVel, double yVel){
     x1+=xVel;
 	x2+=xVel;
 	y1+=yVel;
