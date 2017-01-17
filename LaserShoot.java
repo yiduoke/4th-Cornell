@@ -17,15 +17,15 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
     Mirror penn; //4
     Mirror brian; //5
     
+    Obstacle jonathan;
+    Obstacle kerwin;
+    Obstacle darren;
+    
     JButton margaretButton;
     JButton winstonButton;
     JButton despoinaButton;
     JButton pennButton;
     JButton brianButton;
-
-    Obstacle kerwin;
-    Obstacle jonathan;
-    Obstacle darren;
     
     ArrayList<Double> elainex;
     ArrayList<Double> elainey;
@@ -39,16 +39,22 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	setFocusable(true); //enables keylistener
 	setFocusTraversalKeysEnabled(false);
 	
-	margaret = new Mirror(50,50,200,50);
-	winston = new Mirror(50,100,200,100);
-	despoina = new Mirror(50,150,200,150);
-	penn = new Mirror(50,200,200,200);
-	brian = new Mirror(50,250,200,250);
+	//mirrors
+	margaret = new Mirror(50,50,250,50);
+	winston = new Mirror(50,100,250,100);
+	despoina = new Mirror(50,150,250,150);
+	penn = new Mirror(50,200,250,200);
+	brian = new Mirror(50,250,250,250);
 
-	//kerwin = new Obstacle 
+	//obstacles
+	jonathan = new Obstacle (900.0, 130.0, 100.0, 100.0);
+	kerwin = new Obstacle (1000.0, 500.0, 100.0, 100.0);
+	darren = new Obstacle(240.0,290.0,120.0,120.0);
 	
+	//laser
 	L = new Laser(0.0,350.0);
 	
+	//for the laser path
 	elainex = new ArrayList<Double>();
 	elainey = new ArrayList<Double>();
 	
@@ -120,10 +126,25 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	Line2D.Double briLine = new Line2D.Double(brian.x1, brian.y1, brian.x2, brian.y2);
 	g2d.draw(briLine);
 		
+	
 	//midline
 	g2d.setStroke(new BasicStroke(1));
 	g.setColor(Color.BLACK);
 	g2d.drawLine(0,350,1300,350);
+	
+	//Obstacles
+	//jonathan
+	g2d.setColor(Color.YELLOW);
+	Rectangle2D.Double jonOb = new Rectangle2D.Double(jonathan.x,jonathan.y,jonathan.w,jonathan.h);
+	g2d.fill(jonOb);
+	
+	//kerwin
+	Rectangle2D.Double kerwinOb = new Rectangle2D.Double(kerwin.x,kerwin.y,kerwin.w,kerwin.h);
+	g2d.fill(kerwinOb);
+	
+	//darren
+	Rectangle2D.Double darrenOb = new Rectangle2D.Double(darren.x,darren.y,darren.w,darren.h);
+	g2d.fill(darrenOb);
 		
 	//target
 	g.setColor(Color.GREEN);
@@ -230,6 +251,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 		    margaret.ya = 0.1;
 		}
 	    }
+	    
 	    else if (stateOfSelection.equals("winston")){
 		if (c == KeyEvent.VK_LEFT){
 		    winston.xa = -0.1;
@@ -434,4 +456,3 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
     }
     
 }
-

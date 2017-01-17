@@ -28,10 +28,10 @@ public class Mirror {
     public void rotate(double t) {
 	theta += t;
 	theta %= 2 * Math.PI;
-	x1 = (int) (midX-Math.cos(theta)*75);
-	x2 = (int) (midX+Math.cos(theta)*75);
-	y1 = (int) (midY+Math.sin(theta)*75);
-	y2 = (int) (midY-Math.sin(theta)*75);
+	x1 = (int) (midX-Math.cos(theta)*100);
+	x2 = (int) (midX+Math.cos(theta)*100);
+	y1 = (int) (midY+Math.sin(theta)*100);
+	y2 = (int) (midY-Math.sin(theta)*100);
 	}
 
     public void translate(double xVel, double yVel){
