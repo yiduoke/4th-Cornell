@@ -34,24 +34,19 @@ public class Laser{
 
     public void reflect(Mirror m){
 	if (m.canReflect){
-	    if (Math.sin(theta) > 0 && Math.cos(theta) > 0){
-		theta = 2 * m.theta - theta;
-	    }
-	    else{
-		theta = Math.toRadians(360 - Math.toDegrees(theta) + 2 * Math.toDegrees(m.theta));
-	    }
+	    //if (Math.sin(theta) > 0 && Math.cos(theta) > 0){
+		theta = 2 * m.theta;
+		//}
+		//else{
+		//theta = Math.toRadians(360 - Math.toDegrees(theta) + 2 * Math.toDegrees(m.theta));
+		//}
 	}
 	theta %= 2 * Math.PI;
 	m.canReflect = false;
     }
     
     public void propagate(){
-	if (Math.cos(theta) > 0){
-	    x += 0.1;
-	}
-	else if (Math.cos(theta) < 0){
-	    x -= 0.1;
-	}
+	x += 0.1 * Math.cos(theta);
 	y -= 0.1 * Math.sin(theta);
     }
 }

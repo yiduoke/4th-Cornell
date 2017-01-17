@@ -21,7 +21,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	setFocusTraversalKeysEnabled(false);
 	margaret = new Mirror(100,300,250,300);
 	winston = new Mirror(600,500,750,500);
-	L = new Laser(0.0,300.0);
+	L = new Laser(0.0,350.0);
 	elainex = new ArrayList<Double>();
 	elainey = new ArrayList<Double>();
     }
@@ -45,11 +45,11 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 		
 	//target
 	g.setColor(Color.GREEN);
-	g2d.fillOval(1270, 343, 15, 15);
+	g2d.fillOval(1292, 342, 16, 16);
 		
 	//laser source
 	g.setColor(Color.RED);
-	g2d.fillOval(0, 343, 15, 15);
+	g2d.fillOval(-8, 342, 16, 16);
 
 	//dots on end of mirrors for reference in angle calculation
 	g.setColor(Color.ORANGE);
@@ -60,21 +60,23 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 
 	//laser photon
 	g.setColor(Color.RED);
-	Ellipse2D.Double laser = new Ellipse2D.Double(L.x,L.y,5,5);
+	Ellipse2D.Double laser = new Ellipse2D.Double(L.x-3,L.y-3,6,6);
 	g2d.draw(laser);
 	if (!L.on){
 	    for (int i=0; i<elainex.size();i++){
-		g2d.fillOval(elainex.get(i).intValue(), elainey.get(i).intValue(), 2, 2);
+		g2d.fillOval(elainex.get(i).intValue(), elainey.get(i).intValue(), 1, 1);
 	    }
 	}
     }
 
-     public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e){
 	margaret.rotate(margaret.thetaChange);
 	winston.rotate(winston.thetaChange);
 	margaret.translate(margaret.xa,margaret.ya);
 	winston.translate(winston.xa,winston.ya);
-	if (L.x< 0 || L.x>=1300 || L.y<=0 || L.y>=700){L.on=false;}
+	if (L.x < 0 || L.x >= 1300 || L.y <= 0 || L.y >= 700){
+	    L.on=false;
+	}
 	if(L.on){
 	    L.propagate();
 	    if (L.intersect(margaret)){
@@ -90,7 +92,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	    System.out.println(Math.toDegrees(L.theta));
 	}
 	repaint(); //calls paintcomponent
-     }
+    }
 	
     public void keyPressed(KeyEvent e){
 	int c = e.getKeyCode();
@@ -133,11 +135,11 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 		//Xmargaret.thetaChange=0;
 	    }
 	    if (c == KeyEvent.VK_M){
-		margaret.thetaChange=0.0005;
+		margaret.thetaChange = 0.0002;
 		System.out.println(Math.toDegrees(margaret.theta));
 	    }
 	    if (c == KeyEvent.VK_W){
-		winston.thetaChange=0.0005;
+		winston.thetaChange = 0.0002;
 		winston.xa=0;
 		winston.ya=0;
 	    }

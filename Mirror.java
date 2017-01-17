@@ -4,7 +4,7 @@ public class Mirror {
     double midX,midY;
     double x1, y1, x2, y2;
     double xa, ya;
-    double theta=0;
+    double theta = 0;
     double thetaChange;
     boolean canReflect;
     //LaserShoot laserShoot;
