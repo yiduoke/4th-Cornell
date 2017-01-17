@@ -5,6 +5,7 @@ Our project is a virtual laser shoot, a section of the Science Olympiad event Op
 The mirrors are reflecting correctly (following the law of reflection), moving correctly with arrow keys when selected, and rotate correctly. After the path of the photon is finished shown, it is drawn out.
 
 Did not get around to mirror collision yet.
+You have to press tab until none of the buttons is encircled to move the mirror of selection.
 
 Please compile and run LaserShoot.java
 
