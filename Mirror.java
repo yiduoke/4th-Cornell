@@ -7,6 +7,7 @@ public class Mirror {
     double theta = 0;
     double thetaChange;
     boolean canReflect;
+    Color color;
     //LaserShoot laserShoot;
 
     public Mirror(int a,int b,int c,int d){
@@ -16,7 +17,8 @@ public class Mirror {
     	y2=d;
     	midX=(x1+x2)/2;
     	midY=(y1+y2)/2;
-	canReflect = true;
+    	canReflect = true;
+    	color=Color.BLUE;
     }
 
     public void rotate(double t) {
