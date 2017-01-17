@@ -26,6 +26,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
     JButton despoinaButton;
     JButton pennButton;
     JButton brianButton;
+    JButton resetButton;
     
     ArrayList<Double> elainex;
     ArrayList<Double> elainey;
@@ -47,9 +48,9 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	brian = new Mirror(50,250,250,250);
 
 	//obstacles
-	jonathan = new Obstacle (900.0, 130.0, 100.0, 100.0);
-	kerwin = new Obstacle (1000.0, 500.0, 100.0, 100.0);
-	darren = new Obstacle(240.0,290.0,120.0,120.0);
+	jonathan = new Obstacle (900.0, 125.0, 100.0, 100.0);
+	kerwin = new Obstacle (900.0, 475.0, 100.0, 100.0);
+	darren = new Obstacle(375.0, 275.0, 150.0, 150.0);
 	
 	//laser
 	L = new Laser(0.0,350.0);
@@ -80,9 +81,15 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	add(pennButton);
 	
 	brianButton = new JButton("M5");
-	brianButton.setBounds(150,100,30,30);
+	brianButton.setBounds(250,100,30,30);
 	brianButton.addActionListener(new brianListener());
 	add(brianButton);
+
+	//reset button
+	resetButton = new JButton("Clear Laser");
+	resetButton.setBounds(150,670,30,30);
+	resetButton.addActionListener(new resetListener());
+	add(resetButton);
 
 	margaret.color = Color.GREEN;
 	stateOfSelection = "margaret";
@@ -134,7 +141,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	
 	//Obstacles
 	//jonathan
-	g2d.setColor(Color.YELLOW);
+	g2d.setColor(Color.GRAY);
 	Rectangle2D.Double jonOb = new Rectangle2D.Double(jonathan.x,jonathan.y,jonathan.w,jonathan.h);
 	g2d.fill(jonOb);
 	
@@ -180,10 +187,12 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	penn.translate(penn.xa, penn.ya);
 	brian.translate(brian.xa, brian.ya);
 	
-	if (L.x< 0 || L.x>=1300 || L.y<=0 || L.y>=700){
+	if (L.x < 0 || L.x >= 1300 || L.y <= 0 || L.y >= 700){
 	    L.on = false;
 	}
-	
+	if (kerwin.contains(L.x, L.y) || jonathan.contains(L.x, L.y) || darren.contains(L.x, L.y)){
+	    L.on = false;
+	}
 	if(L.on){
 	    L.propagate();
 	    if (L.collideM(margaret)){
@@ -443,6 +452,15 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	    penn.color=Color.BLUE;
     		
 	    stateOfSelection="brian";   		
+    	}
+    }
+
+    public class resetListener implements ActionListener{   	
+    	public void actionPerformed(ActionEvent e){
+	    L.x = 0.0;
+	    L.y = 350.0;
+	    elainex.clear();
+	    elainey.clear();
     	}
     }
 
