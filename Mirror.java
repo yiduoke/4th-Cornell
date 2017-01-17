@@ -4,7 +4,7 @@ public class Mirror {
     double midX,midY;
     double x1, y1, x2, y2;
     double xa, ya;
-    double theta = 0;
+    double theta;
     double thetaChange;
     boolean canReflect;
     Color color;
@@ -12,11 +12,15 @@ public class Mirror {
 
     public Mirror(int a,int b,int c,int d){
     	x1=a;
-    	y2=b;
+    	y1=b;
     	x2=c;
     	y2=d;
     	midX=(x1+x2)/2;
     	midY=(y1+y2)/2;
+	xa = 0;
+	ya = 0;
+	theta = 0;
+	thetaChange = 0;
     	canReflect = true;
     	color=Color.BLUE;
     }
