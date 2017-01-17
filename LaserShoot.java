@@ -11,8 +11,11 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
     Mirror margaret;
     Mirror winston;
     Laser L;
+    JButton margaretButton;
+    JButton winstonButton;
     ArrayList<Double> elainex;
     ArrayList<Double> elainey;
+    String stateOfSelection;
     
     public LaserShoot(){
 	tm.start();
@@ -21,10 +24,24 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	setFocusTraversalKeysEnabled(false);
 	margaret = new Mirror(100,300,250,300);
 	winston = new Mirror(600,500,750,500);
-	L = new Laser(0.0,350.0);
+	L = new Laser(0.0,300.0);
 	elainex = new ArrayList<Double>();
 	elainey = new ArrayList<Double>();
+	
+	margaretButton = new JButton("margaret");
+	margaretButton.setBounds(50,100,30,30);
+	margaretButton.addActionListener(new margaretListener());
+	add(margaretButton);
+	
+	winstonButton = new JButton("winston");
+	winstonButton.setBounds(100,100,30,30);
+	winstonButton.addActionListener(new winstonListener());
+	add(winstonButton);
+	
+	
     }
+    
+    
     public void paintComponent(Graphics g){
 	super.paintComponent(g);
 	g.setColor(Color.BLUE);
@@ -32,9 +49,14 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 			     RenderingHints.VALUE_ANTIALIAS_ON);
 	//mirrors
+	//margaret
 	g2d.setStroke(new BasicStroke(1));
+	g2d.setColor(margaret.color);
 	Line2D.Double margLine = new Line2D.Double(margaret.x1,margaret.y1,margaret.x2,margaret.y2);
 	g2d.draw(margLine);
+	
+	//winston
+	g2d.setColor(winston.color);
 	Line2D.Double winLine = new Line2D.Double(winston.x1,winston.y1,winston.x2,winston.y2);
 	g2d.draw(winLine);
 		
@@ -45,11 +67,11 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 		
 	//target
 	g.setColor(Color.GREEN);
-	g2d.fillOval(1292, 342, 16, 16);
+	g2d.fillOval(1270, 343, 15, 15);
 		
 	//laser source
 	g.setColor(Color.RED);
-	g2d.fillOval(-8, 342, 16, 16);
+	g2d.fillOval(0, 343, 15, 15);
 
 	//dots on end of mirrors for reference in angle calculation
 	g.setColor(Color.ORANGE);
@@ -60,43 +82,40 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 
 	//laser photon
 	g.setColor(Color.RED);
-	Ellipse2D.Double laser = new Ellipse2D.Double(L.x-3,L.y-3,6,6);
+	Ellipse2D.Double laser = new Ellipse2D.Double(L.x,L.y,5,5);
 	g2d.draw(laser);
 	if (!L.on){
 	    for (int i=0; i<elainex.size();i++){
-		g2d.fillOval(elainex.get(i).intValue(), elainey.get(i).intValue(), 1, 1);
+		g2d.fillOval(elainex.get(i).intValue(), elainey.get(i).intValue(), 2, 2);
 	    }
 	}
     }
 
-    public void actionPerformed(ActionEvent e){
+     public void actionPerformed(ActionEvent e){
 	margaret.rotate(margaret.thetaChange);
 	winston.rotate(winston.thetaChange);
 	margaret.translate(margaret.xa,margaret.ya);
 	winston.translate(winston.xa,winston.ya);
-	if (L.x < 0 || L.x >= 1300 || L.y <= 0 || L.y >= 700){
-	    L.on=false;
-	}
+	if (L.x< 0 || L.x>=1300 || L.y<=0 || L.y>=700){L.on=false;}
 	if(L.on){
 	    L.propagate();
 	    if (L.intersect(margaret)){
 	    	L.reflect(margaret);
-		winston.canReflect = true;
 	    }
 	    if (L.intersect(winston)){
 	    	L.reflect(winston);
-		margaret.canReflect = true;
 	    }
 	    elainex.add(L.x);
 	    elainey.add(L.y);
 	    System.out.println(Math.toDegrees(L.theta));
 	}
 	repaint(); //calls paintcomponent
-    }
+     }
 	
     public void keyPressed(KeyEvent e){
 	int c = e.getKeyCode();
 	if (!L.on){
+		if (stateOfSelection.equals("margaret")){
 	    if (c == KeyEvent.VK_LEFT){
 		margaret.ya=0;
 		margaret.xa=-0.1;
@@ -113,39 +132,40 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	    if (c == KeyEvent.VK_DOWN){
 		margaret.xa=0;
 		margaret.ya=0.1;
-	    }
-	    if (c == KeyEvent.VK_S){
+	    //}
+		}
+		}
+		else if (stateOfSelection.equals("winston")){
+	    if (c == KeyEvent.VK_LEFT){
 		winston.ya=0;
 		winston.xa=-0.1;
 		winston.thetaChange=0;
 	    }
-	    if (c == KeyEvent.VK_F){
+	    if (c == KeyEvent.VK_RIGHT){
 		winston.ya=0;
 		winston.xa=0.1;
-		//margaret.thetaChange=0;
 	    }
-	    if (c ==KeyEvent.VK_E){
+	    if (c ==KeyEvent.VK_UP){
 		winston.ya=-0.1;
 		winston.xa=0;
-		//margaret.thetaChange=0;
 	    }
-	    if (c == KeyEvent.VK_D){
+	    if (c == KeyEvent.VK_DOWN){
 		winston.xa=0;
 		winston.ya=0.1;
-		//Xmargaret.thetaChange=0;
 	    }
+		}
 	    if (c == KeyEvent.VK_M){
-		margaret.thetaChange = 0.0002;
+		margaret.thetaChange=0.0005;
 		System.out.println(Math.toDegrees(margaret.theta));
 	    }
 	    if (c == KeyEvent.VK_W){
-		winston.thetaChange = 0.0002;
+		winston.thetaChange=0.0005;
 		winston.xa=0;
 		winston.ya=0;
 	    }
 	    if (c == KeyEvent.VK_L){
 		L.on = true;
-	    } 
+	    }
 	}
     }
 	
@@ -159,7 +179,6 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	margaret.ya=0;
 	winston.xa=0;
 	winston.ya=0;
-	//L.on=false;
     }
 	
     public static void main (String[] args){
@@ -170,4 +189,22 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.add(LSS);
     }
+    
+    public class margaretListener implements ActionListener{   	
+    	public void actionPerformed(ActionEvent e){
+    		margaret.color=Color.GREEN;
+    		winston.color=Color.BLUE;
+    		stateOfSelection="margaret";
+    	}
+    }
+    
+    public class winstonListener implements ActionListener{   	
+    	public void actionPerformed(ActionEvent e){
+    		winston.color=Color.GREEN;
+    		margaret.color=Color.BLUE;
+    		stateOfSelection="winston";
+    		
+    	}
+    }
 }
+
