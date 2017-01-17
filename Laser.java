@@ -6,9 +6,9 @@ import javax.swing.*;
 
 public class Laser{
 
-    double x, y;
-    double theta;
-    boolean on;
+    private double x, y;
+    private double theta;
+    private boolean on;
 
     public Laser(double x, double y) {
     this.x = x;

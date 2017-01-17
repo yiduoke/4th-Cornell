@@ -12,6 +12,8 @@ public class Obstacle{
     w = width;
     h = height;
     R = new Rectangle2D.Double(x, y, w, h);
+            brian.setxa(-0.1);
+            brian.setya(0);
     }
 
     public boolean contains(double x, double y){

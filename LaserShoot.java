@@ -383,7 +383,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
     brian.setxa(0);
         int c = e.getKeyCode();
     //System.out.println(stateOfSelection);
-    if (!L.on){
+    if (!L.on()){
         if (stateOfSelection.equals("margaret")){
         if (c == KeyEvent.VK_LEFT){
             margaret.setxa(-0.1);
@@ -496,7 +496,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
         }
         //turning on the laser
         if (c == KeyEvent.VK_L){
-        L.on = true;
+        L.seton(true);
         }
     }
     }
