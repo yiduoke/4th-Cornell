@@ -24,12 +24,16 @@ public class Laser{
 	return Math.sqrt((y2-y1)*(y2-y1)+(x2-x1)*(x2-x1));
     }
 
-    public boolean intersect(Mirror m){ //abuses triangle inequality theorem
+    public boolean collideM(Mirror m){ //abuses triangle inequality theorem
 	double d1 = distance(x, y, m.x1, m.y1);
 	double d2 = distance(x, y, m.x2, m.y2);
 	double d3 = distance(m.x1,m.y1,m.x2,m.y2); //length of mirror
 	//return (d1 + d2 >= distance(m.x1,m.y1,m.x2,m.y2)*0.9999 || d1 + d2 <= distance(m.x1,m.y1,m.x2,m.y2)*1.0001);
 	return Math.abs(d1 + d2 - d3) < .005; //allows for an error margin because even doubles can't be that precise, adjust based on tests
+    }
+
+    public boolean collideO(Obstacle o){
+	return o.contains(x, y);
     }
 
     public void reflect(Mirror m){

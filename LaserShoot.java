@@ -96,13 +96,20 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	winston.rotate(winston.thetaChange);
 	margaret.translate(margaret.xa,margaret.ya);
 	winston.translate(winston.xa,winston.ya);
-	if (L.x< 0 || L.x>=1300 || L.y<=0 || L.y>=700){L.on=false;}
+	if (L.x< 0 || L.x>=1300 || L.y<=0 || L.y>=700){
+	    L.on = false;
+	}
+        /*
+	if (L.collideO() || L.collideO() || L.collideO(){
+	    L.on = false;
+	}
+	*/
 	if(L.on){
 	    L.propagate();
-	    if (L.intersect(margaret)){
+	    if (L.collideM(margaret)){
 	    	L.reflect(margaret);
 	    }
-	    if (L.intersect(winston)){
+	    if (L.collideM(winston)){
 	    	L.reflect(winston);
 	    }
 	    elainex.add(L.x);
