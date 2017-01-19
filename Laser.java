@@ -64,7 +64,7 @@ public class Laser{
 
     public void setx(double a){x=a;}
     public void sety(double a){y=a;}
-    public void setTheta(double a){theta=a;}
+    public void settheta(double a){theta=a;}
     public void seton(boolean a){on=a;}
 
 }

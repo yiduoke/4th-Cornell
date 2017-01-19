@@ -590,6 +590,8 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
         public void actionPerformed(ActionEvent e){
         L.setx(0.0);
         L.sety(350.0);
+	L.settheta(0.0);
+	L.seton(false);
         elainex.clear();
         elainey.clear();
         }
