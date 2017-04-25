@@ -461,6 +461,7 @@ public class LaserShoot extends JPanel implements ActionListener, KeyListener{
 	    L.y = 350.0;
 	    elainex.clear();
 	    elainey.clear();
+	    L.theta=0;
     	}
     }
 
